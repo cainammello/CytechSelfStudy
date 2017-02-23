@@ -15,6 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import cytech.com.br.studiocarolinelima.fragments.GalleryFragment;
+import cytech.com.br.studiocarolinelima.fragments.HomeFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     static boolean active = false;
@@ -23,6 +26,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Init the fragment manager, compatible with all android versions
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+
+        //Init the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -43,6 +51,11 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        //Start the application with the HomeFragment in the MainActivity layout.
+        if (savedInstanceState == null) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
+        }
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -86,9 +99,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_sair) {
-            Intent it = new Intent(MainActivity.this, GalleryActivity.class);
-
-            startActivity(it);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -99,34 +110,27 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_home){
-            if(!MainActivity.active){
-            Intent it = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(it);
-            }else{
-            }
+
+        //Create an object Fragment Manager and start it with the fragmentManager of this project
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+
+        //verify what menu button was pressed and begin the fragment transition,
+        // replace it for a new fragment (first fragment)
+        if (id == R.id.nav_home) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
         }else
-            if (id == R.id.nav_camera) {
-
-        } else
             if (id == R.id.nav_gallery) {
-                if(!GalleryActivity.active){
-                    Intent it = new Intent(MainActivity.this, GalleryActivity.class);
-                    startActivity(it);
-                }else{
-                }
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new GalleryFragment()).commit();
         } else
-            if (id == R.id.nav_slideshow) {
+            if (id == R.id.nav_place) {
+
+        } else //services
+            if (id == R.id.nav_cut) {
 
         } else
-            if (id == R.id.nav_manage) {
-
-        } else
-            if (id == R.id.nav_share) {
-
-        } else
-            if (id == R.id.nav_send) {
-
+            if (id == R.id.nav_offers) {
+        }else
+            if (id == R.id.nav_time) {
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

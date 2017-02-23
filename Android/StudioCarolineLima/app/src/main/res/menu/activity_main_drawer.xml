@@ -4,23 +4,40 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_home" android:icon="@drawable/ic_menu_home"
             android:title="Home" />
-        <item android:id="@+id/nav_camera" android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
         <item android:id="@+id/nav_gallery" android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item android:id="@+id/nav_slideshow" android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item android:id="@+id/nav_manage" android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Fotos" />
+        <item android:id="@+id/nav_place" android:icon="@drawable/ic_place_black_24dp"
+            android:title="Localização" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Serviços">
         <menu>
-            <item android:id="@+id/nav_share" android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item android:id="@+id/nav_send" android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+            <item android:id="@+id/nav_cut" android:icon="@drawable/ic_cut_black_24dp"
+                android:title="Cortes" />
+            <item android:id="@+id/nav_offers" android:icon="@drawable/ic_offers_black_24dp"
+                android:title="Ofertas" />
+            <item android:id="@+id/nav_time" android:icon="@drawable/ic_time_black_24dp"
+                android:title="Horários" />
         </menu>
     </item>
 
+    <item android:title="Contato">
+        <menu>
+            <item android:id="@+id/nav_contact" android:icon="@drawable/ic_contact_black_24dp"
+                android:title="Fale conosco" />
+            <item android:id="@+id/nav_share" android:icon="@drawable/ic_menu_share"
+                android:title="Compartilhar" />
+            <item android:id="@+id/nav_send" android:icon="@drawable/ic_menu_send"
+                android:title="Enviar" />
+        </menu>
+    </item>
+    <item android:title="Informações">
+        <menu>
+            <item android:id="@+id/nav_info" android:icon="@drawable/ic_info_black_24dp"
+                android:title="Horários" />
+            <item android:id="@+id/nav_code" android:icon="@drawable/ic_code_black_24dp"
+                android:title="Desenvolvido por" />
+        </menu>
+    </item>
 </menu>
+
