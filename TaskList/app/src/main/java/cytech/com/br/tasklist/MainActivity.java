@@ -1,11 +1,12 @@
 package cytech.com.br.tasklist;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,15 +18,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cytech.com.br.tasklist.cytech.com.br.tasklistDB.DbHelper;
+import cytech.com.br.tasklist.cytech.com.br.tasklistDB.TaskListEntry;
+
 public class MainActivity extends AppCompatActivity {
     private List<String> tasks = new ArrayList<String>();
     private ListView listView;
     private ArrayAdapter arrayAdapter;
+    private DbHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new DbHelper(this);
 
         listView = (ListView) findViewById(R.id.listView);
         arrayAdapter = new ArrayAdapter(this, R.layout.item_task, R.id.textView, tasks);
@@ -44,26 +51,38 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add_task:
-                final EditText editText = new EditText(this);
-
-                AlertDialog dialog = new AlertDialog.Builder(this)
-                        .setTitle("Add new Task")
-                        .setMessage("What do you want to add?")
-                        .setView(editText)
-                        .setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                String task = String.valueOf(editText.getText());
-                                arrayAdapter.add(task);
-                                Log.d("Main", "Task addes: " + tasks);
-                            }
-                        })
-                        .setNegativeButton("Cancel", null)
-                        .create();
-                dialog.show();
+                return createTask();
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public boolean createTask(){
+        final EditText taskText = new EditText(this);
+
+        AlertDialog alertDialog = new AlertDialog
+                .Builder(this)
+                .setTitle("Add a new task")
+                .setMessage("What do you want to do?")
+                .setView(taskText)
+                .setPositiveButton("add", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        String task = String.valueOf(taskText.getText());
+                        SQLiteDatabase dbHelper = db.getWritableDatabase();
+                        ContentValues values = new ContentValues();
+
+                        values.put(TaskListEntry.COL_TASK_TITLE, task);
+                        dbHelper.insertWithOnConflict(TaskListEntry.TABLE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+                        db.close();
+
+                    }
+                })
+                .setNegativeButton("Close", null)
+                .create();
+
+        alertDialog.show();
+        return true;
     }
 
     public void removeTask(View view){
