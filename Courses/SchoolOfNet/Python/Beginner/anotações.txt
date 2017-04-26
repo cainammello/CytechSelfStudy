@@ -1,0 +1,155 @@
+Curso Python pra iniciantes
+
+* Comando para executar um arquivo ".py", python NOME_DO_ARQUIVO;
+* Python não usa chaves para definir o escopo e sim tabs ("	");
+* Para definir uma função se usa a palavra reservada "def";
+* Python não é uma linguagem tipada;
+* Python sempre irá retornar um número flutuante em uma operação de divisão, mesmo que os números envolvidos na 		operação sejam inteiros;
+* Quando quiser pegar apenas o resto inteiro da divisão usa-se o "//" na operação de divisão. 
+	EX. 10 // 3, isso irá retornar somente 3;
+* Exponênciação é dada pelo "**".
+	Ex. 2 ** 3, será igual a 8;
+* Função de imprimir: "print("string")"
+* Quebra de linha: "\n". 
+	Ex. print("Cainã\nMello")
+*Caso queira que a função print ignore o "\n" coloque o caractere "r" antes do valor a ser imprimido.
+	Ex. print(r"Cainã\nMello")
+*Para comentar uma linha em python usa-se "#", e para comentar um bloco usa-se ''' SEU_CODIGO ''' (3 apostrofos);
+
+--------------- Manipulando Strings --------------
+* Uma string em python pode ser definida usando tanto apas simples como dupla;
+* Para concatenar duas string é só utilizar o operador "+";
+* Caso queira mostrar uma mensagem várias vezes é só multiplica-la pelo o número inteiro que quiser.
+	Ex. var = "Cainã Mello"
+		var * 2, irá retornar 'Cainã MelloCainã Mello'
+* Em python pe possível multiplicar o valor de uma string por qualquer inteiro;
+* Em python toda string é um vetor de char, ou seja, é possível acessar cada caractere de uma string pela sua posição.
+	Ex. name = "Cainã Mello"
+		name[0], irá retornar o caractere "C".
+*É possível acessar um intervalo também.
+	Ex. name[0:4], irá retornar "Cainã"
+* Caso não saiba em que possição a string termina é possível deixar esse parâmetro em branco.
+	Ex. name[5:], irá pegar da posição 5 ao final da string
+		name[:8], do mesmo modo, irá pegar do ínicio a posição 8;
+
+--------------- Brincando com listas -----------------
+* Usa-se cochetes para criar uma lista com seus valores separados por vírgula;
+	Ex. numbers = [1, 4 ,5 , 6]
+* Para concatenar duas strings, basta usar o operador "+";
+* As posições e o slice(elemento por posição) da parte de string se aplica do mesmo modo em listas;
+* Em python é possível ter listas com tipos mistos.
+	Ex. mix = [1, "e", 4.3, [4, 6, "lista dentro de lista"] ]
+* Acessar um elemento que está dentro de outra lista, mix[4][2];
+* Para adicionar um elemento em uma lista, usa-se a função "append()"
+	Ex. numbers.append(8), irá retornar [1, 4 ,5 , 6, 8]
+* Para remover um item de uma lista a função "remove()"
+	Ex. numbers.remove(8), a função remove irá apagar a PRIMEIRA ocorrência do número 8;
+* Para remover um indice que só se sabe a posição dele na lista, usa-se a função "del()".
+	Ex. del(numbers[POSIÇÃO_DO_ELEMENTO])
+
+
+--------------- Trabalhando com Operadores Condicionais ---------
+* Na função "if" não é necessário colocar os parametros entre parênteses, e depois dos parametros coloca-se ":".
+	Ex. if parm1 > param2:
+			print("something!")
+
+* Mesmo caso para o else;
+* Em python o "elseif", é representado por "elif";
+* operadores: >, <, ==, !=, =>, <=, in (verifica se determinado valor está dentro de uma lista);
+* também é possível usar o "if not";
+
+---------------- Laços: for ----------------------
+* exemplo de uso do for:
+	list = [3, 4, 19, 3, 34]
+
+	for item in list:
+		print(item)
+
+* A variável "item" depois de "for", é criada em tempo de execução e só vale dentro do escopo do "for";
+* O escopo do por é definido pela "tab"
+* Na lista percorrida pelo "for" pode ser usado o slice.
+	Ex. list = [3, 4, 19, 3, 34]
+
+			for item in list[2:5]:
+			print(item)
+
+* Percorrer uma lista usando o "for" é percorrer seus elementos, o que nos permite percorrer lista de qualquer tipo de elemento.
+	Ex. list2 = ["Cainã", "Mello"]
+
+		for name in list2:
+			print(name)
+
+---------------- Laços: While ------------------
+* exemplo de uso de laço "while"
+	number = 5
+
+	while number < 10:
+		print(number)
+
+		number += 1
+* em um laço while, há uma condição par aque o laço inicie, quando ele é interrompido é o mesmo que dizer que essa condição não é mais verdadeira, não é mais true. Sendo assim é possível usar o "else" juntamente com o "while".
+	Ex. number = 5
+		while number < 10:
+			print(number)
+			number += 1
+		else:
+			print("Not true anymore!")
+
+
+-------------- Trabalhando com funções -----------
+* As funções são definidas usando o "def"
+	ex. def call_numbers():
+			for number in range(0, 10):
+			print(number)
+
+		call_numbers()
+
+* funções com parametros
+	def call_numbers_with_limit(limit):
+		list = range(0,10)
+
+		for number in list[0:limit]:
+			print(number)
+			
+		print("Limit reached!")
+		
+	call_numbers_with_limit(5)
+
+* Em python também é possível nomear os parametros que se quer passar em uma função.
+	Ex. def calculator(x,y):
+			print(x+y)
+
+		calculator(y=10, x=5)
+
+
+----------------- trabalhando com dicionários ---------------
+* Um dicionário é formado por chave e valor
+	Ex. cars = {}
+
+	cars['colora']  = 'red'
+	cars['ferrari'] = 'blue'
+	cars['fuska'] = 'black'
+
+* Depois de alimentar o objeto com as chaves e valores é possível acessar todas as chaves ou somentes os valores, ou até mesmo o valor por uma chave.
+	Ex. print(cars.keys()), irá retornar todas as keys.
+	Ex2. print(cars.values()), irá retornar todos os valores.
+	Ex3. print(cars['colora']), retorna o valor de 'colora', no caso 'red'.
+
+* Criar um dicionário e já inicializado
+	people = dict(cainã='father', mardila='mother', caick='son')
+	print(people)
+
+* É possível verificar se um valor existe dentro do dicionário.
+	Ex. if 'cainã' in people:
+			print(people['cainã'])
+	irá retornar o valor de 'cainã', no caso father.
+
+* Outra forma de definir um dicionário é:
+	family = {
+		'cainã':'father'
+	}
+
+* Também é possível ter dicionários dentro de dicionários;
+* Quando se trabalha com dicionários é possível navegar dentro dele usando dois parametros.
+	Ex. for key, value in cars.items():
+			print(key + " = " + value)
